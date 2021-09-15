@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>logo_white-uai-258x70.png</file>
+    </qresource>
+</RCC>

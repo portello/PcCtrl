@@ -42,7 +42,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="PcCtrl.qrc">:/img/logo_white-uai-258x70.png</pixmap>
+          <pixmap resource="PcCtrl.qrc">:/img/GS.png</pixmap>
          </property>
         </widget>
        </item>

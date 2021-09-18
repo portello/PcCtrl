@@ -152,6 +152,9 @@ void MainWindow::on_pbSaveData_clicked()
 
 void MainWindow::on_pbGetData_clicked()
 {
+    if (f_conn == nullptr || !f_connected)
+        return;
+
     f_downloading = true;
 
     QFileDialog sfd(this, tr("Export ATE configuration"), QString(), tr("All Files(*)"));
@@ -222,19 +225,22 @@ void MainWindow::netManagerFinished(QNetworkReply *netReply)
 
 void MainWindow::on_cb8b10b_stateChanged(int arg1)
 {
-    if (arg1)
+    if (f_conn != nullptr && f_connected)
     {
-        logText(f_conn->execCommand("reg 6 1"));
-    }
-    else
-    {
-        logText(f_conn->execCommand("reg 6 0"));
+        if (arg1)
+        {
+            logText(f_conn->execCommand("reg 6 1"));
+        }
+        else
+        {
+            logText(f_conn->execCommand("reg 6 0"));
+        }
     }
 }
 
 void MainWindow::on_cbGtp_currentIndexChanged(int index)
 {
-    if (f_conn == nullptr)
+    if (f_conn == nullptr || !f_connected)
         return;
 
     switch (index)
@@ -261,7 +267,7 @@ void MainWindow::logText(QString text)
 
 void MainWindow::on_pbStartAcq_clicked()
 {
-    if (f_conn != nullptr)
+    if (f_conn != nullptr && f_connected)
     {
         ui->cbBusy->setChecked(true);
         f_conn->sendCmd("cmd 0x6D");
